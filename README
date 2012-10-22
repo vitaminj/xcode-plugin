@@ -1,9 +1,13 @@
 Xcode plugin
---------------------------------------------------------------------------------------------------------------------------------------------------
-Note: This fork is specifically to support a bug where you cannot embed a provisioning profile in your .IPA file because
-      the plugin doesn't pass the signing certificate.  See https://issues.jenkins-ci.org/browse/JENKINS-14028 
-      This adds a field for the signing certificate (the --sign param) and allows you to bundle a provisioning profile in your .IPA.  
-      This is useful for distribution builds within your enterprise, without the iOS devices needing to be 'developer' devices.
+------------------------------------------------------------------------------
+Note: This fork is specifically to support a bug where you cannot embed a
+      provisioning profile in your .IPA file because the plugin doesn't pass 
+      the signing certificate.  
+      See https://issues.jenkins-ci.org/browse/JENKINS-14028 
+      This adds a field for the signing certificate (the --sign param) and 
+      allows you to bundle a provisioning profile in your .IPA. This is useful
+      for distribution builds within your enterprise, without the iOS devices
+      needing to be 'developer' devices.
 
 Quick installation guide:
  1. Clone this repo to your machine
@@ -11,21 +15,27 @@ Quick installation guide:
      mvn install
  3. To run stand alone version of Jenkins with this plugin, type:
      mvn hpi:run
- 4. Or, to install this plugin, go to Manage Jenkins, Manage Plugins, Advanced, Upload from File, then Choose file, and
-    find the .HPI file.  
- 5. Restart Jenkins. When it restarts, you should see the version of xcode-plugin that says something like
-    '1.3.2-SNAPSHOT (private-...)'.  This means it installed correctly.  
+ 4. Or, to install this plugin, go to Manage Jenkins, Manage Plugins, 
+    Advanced, Upload from File, then Choose file, and find the .HPI file.  
+ 5. Restart Jenkins. When it restarts, you should see the version of 
+    xcode-plugin that says something like '1.3.2-SNAPSHOT (private-...)'.  
+    This means it installed correctly.  
 
 After successful installation:
-   In your Xcode Build you should now have a "Code Signing Identity" field right above the "Embedded Profile" field.
+   In your Xcode Build you should now have a "Code Signing Identity" field 
+   right above the "Embedded Profile" field.
+
    Put the name of your identity in the "Code Signing Identity" field
      iPhone Distribution: My Corporation
-   Put the full path to your provisioning profile associated with that identity in the "Embedded Profile" field
-     /Users/myusername/workspace/ProvProfiles/ABC5F123-4567-8910-ABCD-987654ABCD432.mobileprovision 
-   NOTE: Copy your profile to some path without spaces in the name. By default it will be in a path with spaces, and 
-         I haven't been able to get that to work, even when escaping the spaces.
 
---------------------------------------------------------------------------------------------------------------------------------------------------
+   Put the full path to your provisioning profile associated with that 
+   identity in the "Embedded Profile" field:
+     /Users/myusername/workspace/ProvProfiles/ABC5F123-etc.mobileprovision 
+   NOTE: Copy your profile to some path without spaces in the name. 
+         By default it will be in a path with spaces, and I haven't been 
+         able to get that to work, even when escaping the spaces.
+
+---------------------------------------------------------------------------
 This plugin adds the ability to call Xcode command line tools to automate build and packaging iOS applications (iPhone, iPad, ...).
 *  More documentation about how to use it : https://wiki.jenkins-ci.org/display/JENKINS/Xcode+Plugin
 *  Report all issues or features requests in Jira : https://issues.jenkins-ci.org/browse/JENKINS/component/16124
