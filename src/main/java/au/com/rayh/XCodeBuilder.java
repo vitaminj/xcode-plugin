@@ -133,10 +133,14 @@ public class XCodeBuilder extends Builder {
      * @since 1.3.2
      */
     public final String codeSigningIdentity;
+    /**
+     * @since 1.3.2
+     */
+    public final Boolean createXcarchive;
 
     // Fields in config.jelly must match the parameter names in the "DataBoundConstructor"
     @DataBoundConstructor
-    public XCodeBuilder(Boolean buildIpa, Boolean cleanBeforeBuild, Boolean cleanTestReports, String configuration, String target, String sdk, String xcodeProjectPath, String xcodeProjectFile, String xcodebuildArguments, String embeddedProfileFile, String cfBundleVersionValue, String cfBundleShortVersionStringValue, Boolean unlockKeychain, String keychainPath, String keychainPwd, String symRoot, String xcodeWorkspaceFile, String xcodeSchema, String configurationBuildDir, String codeSigningIdentity) {
+    public XCodeBuilder(Boolean buildIpa, Boolean cleanBeforeBuild, Boolean cleanTestReports, String configuration, String target, String sdk, String xcodeProjectPath, String xcodeProjectFile, String xcodebuildArguments, String embeddedProfileFile, String cfBundleVersionValue, String cfBundleShortVersionStringValue, Boolean unlockKeychain, String keychainPath, String keychainPwd, String symRoot, String xcodeWorkspaceFile, String xcodeSchema, String configurationBuildDir, String codeSigningIdentity, Boolean createXcarchive) {
         this.buildIpa = buildIpa;
         this.sdk = sdk;
         this.target = target;
@@ -157,6 +161,7 @@ public class XCodeBuilder extends Builder {
         this.keychainPwd = keychainPwd;
         this.symRoot = symRoot;
         this.configurationBuildDir = configurationBuildDir;
+        this.createXcarchive = createXcarchive;
     }
 
     @Override
@@ -377,7 +382,7 @@ public class XCodeBuilder extends Builder {
         } else {
             xcodeReport.append(", clean: NO");
         }
-        commandLine.add("build");
+        commandLine.add(createXcarchive ? "archive": "build");
 
         if (!StringUtils.isEmpty(symRootValue)) {
             commandLine.add("SYMROOT=" + symRootValue);

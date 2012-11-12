@@ -104,6 +104,11 @@
         <f:checkbox />
     </f:entry>
 
+    <f:entry title="${%Create xcarchive?}" field="createXcarchive"
+      description="This will create an xcarchive suitable for App Store submission.">
+        <f:checkbox/>
+    </f:entry>
+
     <f:entry title="${%Code Signing Identity}" field="codeSigningIdentity"
       description="Override the code signing identity specified in the project">
         <f:textbox />
